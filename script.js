@@ -28,7 +28,7 @@ function getPost(id){
     fetch(`https://dummyjson.com/posts/${id}`)
     .then(response => response.json())
     .then(postData => {
-      const post = postData;
+      const post = {...postData};
       fetch(`https://dummyjson.com/users/${post.userId}`)
       .then(response => response.json())
       .then(userData => {
@@ -76,3 +76,47 @@ function lanciaDado(){
 lanciaDado()
 .then(messaggio => console.log(messaggio))
 .catch(error => console.log(error))
+
+
+function creaLanciaDado(){
+  let risultato
+
+  return function checkRisultato(){
+    const promise = new Promise((resolve,reject) => {
+      console.log("Lancio il dado")
+      setTimeout(() =>{ 
+        let messaggio
+        let probabilità = Math.floor(Math.random() * 101);
+        if ( probabilità > 20){
+          let dado = Math.floor(Math.random() * 6) + 1;
+          if(risultato === dado){
+            messaggio = `Il tuo tiro è sempre ${dado}, INCREDIBILE!`
+            resolve(messaggio)
+          } else{
+            risultato = dado
+            messaggio = `Il tuo tiro è ${dado}`;
+            resolve(messaggio)
+          } } else {
+          const error = `Il dado si è incastrato`
+          reject(error)
+        }
+      }, 3000)
+    })
+    return promise
+
+  } 
+  
+}
+
+const lancia = creaLanciaDado();
+lancia()
+.then(messaggio => console.log(messaggio))
+.catch(error => console.error(error))
+lancia()
+.then(messaggio => console.log(messaggio))
+.catch(error => console.error(error))
+lancia()
+.then(messaggio => console.log(messaggio))
+.catch(error => console.error(error))
+
+
