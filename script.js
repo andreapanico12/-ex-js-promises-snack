@@ -91,12 +91,12 @@ function creaLanciaDado(){
           let dado = Math.floor(Math.random() * 6) + 1;
           if(risultato === dado){
             messaggio = `Il tuo tiro è sempre ${dado}, INCREDIBILE!`
-            resolve(messaggio)
-          } else{
-            risultato = dado
-            messaggio = `Il tuo tiro è ${dado}`;
-            resolve(messaggio)
-          } } else {
+          } else {
+            messaggio = `Il tuo tiro è ${dado}`
+          }
+          risultato = dado;
+          resolve(messaggio)
+         } else {
           const error = `Il dado si è incastrato`
           reject(error)
         }
