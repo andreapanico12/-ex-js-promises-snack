@@ -81,7 +81,7 @@ lanciaDado()
 function creaLanciaDado(){
   let risultato
 
-  return function checkRisultato(){
+  return function(){
     const promise = new Promise((resolve,reject) => {
       console.log("Lancio il dado")
       setTimeout(() =>{ 
